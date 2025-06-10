@@ -6,7 +6,6 @@ on:
 
 jobs:
   run-specific-cypress-test:
-    if: github.event.action == 'run-cypress-from-repo-b'
     runs-on: ubuntu-latest
 
     steps:
