@@ -11,3 +11,7 @@ jobs:
     steps:
       - name: Trigger echo
         run: echo "test"
+      - name: Run WebSocket Test
+        run: echo "$ENV"
+        env:
+          ENV: ${{ github.event.client_payload.environment }}
