@@ -15,4 +15,4 @@ jobs:
       - name: Run WebSocket Test
         run: echo "$ENV"
         env:
-          ENV: ${{ github.event.client_payload.environment }}
+          ENV: ${{ github.event.client_payload.environment || 'dev123' }}
