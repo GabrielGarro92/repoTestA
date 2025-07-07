@@ -1,8 +1,8 @@
 name: Run Cypress Test from Repoo B
 
 on:
-  #repository_dispatch:
-  #  types: [run-cypress-from-repo-b]
+  repository_dispatch:
+    types: [run-cypress-from-repo-b]
   schedule:
     - cron: "*/1 * * * *"
   #workflow_dispatch:
