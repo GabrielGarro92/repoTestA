@@ -1,4 +1,4 @@
-name: Run Cypress Test from Repo B
+name: Run Cypress Test from Repoo B
 
 on:
   repository_dispatch:
