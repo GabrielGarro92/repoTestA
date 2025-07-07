@@ -18,15 +18,28 @@ on:
           - test
 
 jobs:
-  run-specific-cypress-test:
+  run-specific-cypress-test-matrix:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [dev, qa, test]
+    steps:
+      - name: Print environment
+        run: echo ${{ matrix.environment }}
+        env:
+          ENV: ${{ github.event.client_payload.environment || github.event.inputs.environment || 'dev123' }}
+      - name: Print event name
+        run: echo "event name is:" ${{ github.event_name }}
+        
+  run-specific-cypress-test-single:
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger echo
-        run: echo "test"
-      - name: Run WebSocket Test
-        run: echo "$ENV"
+      - name: Print environment
+        run: echo $ENV
         env:
           ENV: ${{ github.event.client_payload.environment || github.event.inputs.environment || 'dev123' }}
-      - name: Ver evento
+      - name: Print event name
         run: echo "event name is:" ${{ github.event_name }} 
