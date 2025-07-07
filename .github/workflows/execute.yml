@@ -4,6 +4,16 @@ on:
   repository_dispatch:
     types: [run-cypress-from-repo-b]
   workflow_dispatch:
+    inputs:
+      environment: 
+        description: 'Environment on which you want to run the WebSocket tests'
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - qa
+          - test
 
 jobs:
   run-specific-cypress-test:
@@ -15,4 +25,4 @@ jobs:
       - name: Run WebSocket Test
         run: echo "$ENV"
         env:
-          ENV: ${{ github.event.client_payload.environment || 'dev123' }}
+          ENV: ${{ github.event.client_payload.environment || github.event.inputs.environment || 'dev123' }}
