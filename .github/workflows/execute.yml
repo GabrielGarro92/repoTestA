@@ -5,17 +5,17 @@ on:
     types: [run-cypress-from-repo-b]
   schedule:
     - cron: "*/1 * * * *"
-  #workflow_dispatch:
-  #  inputs:
-  #    environment: 
-  #      description: 'Environment on which you want to run the WebSocket tests'
-  #      required: true
-  #      default: dev
-  #      type: choice
-  #      options:
-  #        - dev
-  #        - qa
-  #        - test
+  workflow_dispatch:
+    inputs:
+      environment: 
+        description: 'Environment on which you want to run the WebSocket tests'
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - qa
+          - test
 
 jobs:
   run-specific-cypress-test:
