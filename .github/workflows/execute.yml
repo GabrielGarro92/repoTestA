@@ -4,7 +4,7 @@ on:
   #repository_dispatch:
   #  types: [run-cypress-from-repo-b]
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/1 * * * *"
   #workflow_dispatch:
   #  inputs:
   #    environment: 
@@ -28,3 +28,5 @@ jobs:
         run: echo "$ENV"
         env:
           ENV: ${{ github.event.client_payload.environment || github.event.inputs.environment || 'dev123' }}
+      - name: Ver evento
+        run: echo "event name is:" ${{ github.event_name }} 
