@@ -4,7 +4,6 @@ on:
   repository_dispatch:
     types: [run-cypress-from-repo-b]
   schedule:
-    # every 1 minute from 6am-7pm EDT, Monday-Sunday
     - cron: "*/1 * * * *"
   workflow_dispatch:
     inputs:
