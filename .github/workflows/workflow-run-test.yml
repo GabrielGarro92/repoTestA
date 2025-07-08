@@ -2,12 +2,15 @@ name: Execute workflow
 
 on:
   workflow_run:
-    workflows: ["Run Cypress Test from Repoo B"]
+    workflows:
+      - Run Cypress Test from Repoo B
+      - Test workflow
     types:
       - completed
 
 jobs:
   extract-environment:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Infer environment from run-name
