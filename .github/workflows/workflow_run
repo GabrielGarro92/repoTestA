@@ -1,0 +1,16 @@
+name: Execute workflow
+
+on:
+  workflow_run:
+    workflows: ["Run Cypress Test from Repoo B"]
+    types:
+      - completed
+
+jobs:
+  extract-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print workflow A run-name
+        run: |
+          RUN_NAME="${{ github.event.workflow_run.name }}"
+          echo "Run name: $RUN_NAME"
