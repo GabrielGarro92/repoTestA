@@ -10,17 +10,20 @@ jobs:
   extract-environment:
     runs-on: ubuntu-latest
     steps:
-      - name: Print workflow A run-name
+      - name: Infer environment from run-name
+        id: infer_env
         run: |
           RUN_NAME="${{ github.event.workflow_run.name }}"
           echo "Run name: $RUN_NAME"
       
-          LAST_WORD=$(echo "$RUN_NAME" | awk '{print $NF}' | tr -d "'\"")
+          TEST_ENVIRONMENT=$(echo "$RUN_NAME" | awk '{print $NF}' | tr -d "'\"")
       
-          if [[ "$LAST_WORD" == "dev" || "$LAST_WORD" == "qa" || "$LAST_WORD" == "test" ]]; then
-            echo "env=$LAST_WORD" >> $GITHUB_OUTPUT
+          if [[ "$TEST_ENVIRONMENT" == "dev" || "$TEST_ENVIRONMENT" == "qa" || "$TEST_ENVIRONMENT" == "test" ]]; then
+            echo "env=$TEST_ENVIRONMENT" >> $GITHUB_OUTPUT
           else
             echo "env=unknown" >> $GITHUB_OUTPUT
           fi
-      
-          echo "Last word (environment candidate): $LAST_WORD"
+          
+      - name: Trigger cypress test
+        run: |
+          echo "The environment is: ${{ steps.infer_env.outputs.env }}"
