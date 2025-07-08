@@ -1,4 +1,5 @@
 name: Run Cypress Test from Repoo B
+run-name: "Deploy to Gabriel environment"
 
 on:
   repository_dispatch:
