@@ -1,4 +1,4 @@
-name: Run Test
+name: Test workflow
 run-name: Deploy '(test)' to '${{github.event.inputs.environment}}'
 
 on:
