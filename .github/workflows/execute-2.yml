@@ -1,0 +1,44 @@
+name: Run Test
+run-name: Deploy '(test)' to '${{github.event.inputs.environment}}'
+
+on:
+  repository_dispatch:
+    types: [run-cypress-from-repo-b]
+  workflow_dispatch:
+    inputs:
+      environment: 
+        description: 'Environment on which you want to run the WebSocket tests'
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - qa
+          - test
+
+jobs:
+  run-specific-cypress-test-matrix:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [dev, qa, test]
+    steps:
+      - name: Print environment
+        run: echo ${{ matrix.environment }}
+        env:
+          ENV: ${{ github.event.client_payload.environment || github.event.inputs.environment || 'dev123' }}
+      - name: Print event name
+        run: echo "event name is:" ${{ github.event_name }}
+        
+  run-specific-cypress-test-single:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print environment
+        run: echo $ENV
+        env:
+          ENV: ${{ github.event.client_payload.environment || github.event.inputs.environment || 'dev123' }}
+      - name: Print event name
+        run: echo "event name is:" ${{ github.event_name }} 
