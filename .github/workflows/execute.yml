@@ -1,5 +1,5 @@
 name: Run Cypress Test from Repoo B
-run-name: Deploy '1.0.11-SNAPSHOT-(test)' to '${{github.event.inputs.environment}}'
+run-name: Promote 'dev' to '${{github.event.inputs.environment}}'
 
 on:
   repository_dispatch:
