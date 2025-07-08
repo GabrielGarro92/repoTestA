@@ -1,5 +1,5 @@
 name: Run Cypress Test from Repoo B
-run-name: "Deploy '1.0.11-SNAPSHOT-(test)' to 'dev'"
+run-name: Deploy '1.0.11-SNAPSHOT-(test)' to 'dev'
 
 on:
   repository_dispatch:
