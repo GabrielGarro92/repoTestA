@@ -18,7 +18,7 @@ jobs:
           LAST_WORD=$(echo "$RUN_NAME" | awk '{print $NF}' | tr -d "'\"")
       
           if [[ "$LAST_WORD" == "dev" || "$LAST_WORD" == "qa" || "$LAST_WORD" == "test" ]]; then
-            echo "env=$LAST_WORD" >> $GITHUB_OUTPUT
+            echo "Run name: $LAST_WORD"
           else
             echo "env=unknown" >> $GITHUB_OUTPUT
           fi
