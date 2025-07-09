@@ -25,6 +25,8 @@ jobs:
   run-specific-cypress-test-matrix:
     if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
+    env:
+      MY_VAR: cypress/test.cy.ts
     strategy:
       matrix:
         environment: [dev, qa, test]
@@ -35,6 +37,8 @@ jobs:
           ENV: ${{ github.event.client_payload.environment || github.event.inputs.environment || 'dev123' }}
       - name: Print event name
         run: echo "event name is:" ${{ github.event_name }}
+      - name: Print env var
+        run: echo $MY_VAR
         
   run-specific-cypress-test-single:
     if: github.event_name != 'schedule'
