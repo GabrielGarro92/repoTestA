@@ -53,5 +53,5 @@ jobs:
           if [ -n "$INPUT" ]; then
             MY_VAR="--spec $INPUT"
           fi
-          echo %MY_VAR
+          echo $MY_VAR
 
