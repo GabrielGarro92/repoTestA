@@ -52,5 +52,6 @@ jobs:
           INPUT="${{ github.event.inputs.spec_suite }}"
           if [ -n "$INPUT" ]; then
             MY_VAR="--spec $INPUT"
+          fi
           echo %MY_VAR
 
