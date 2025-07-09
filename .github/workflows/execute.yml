@@ -20,13 +20,13 @@ on:
       spec_suite:
         required: false
         type: string
+env:
+  MY_VAR: cypress/api/wsEvents.cy.ts
 
 jobs:
   run-specific-cypress-test-matrix:
     if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
-    env:
-      MY_VAR: cypress/test.cy.ts
     strategy:
       matrix:
         environment: [dev, qa, test]
