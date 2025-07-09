@@ -17,6 +17,9 @@ on:
           - dev
           - qa
           - test
+      spec_suite:
+        required: false
+        type: string
 
 jobs:
   run-specific-cypress-test-matrix:
@@ -43,4 +46,11 @@ jobs:
         env:
           ENV: ${{ github.event.client_payload.environment || github.event.inputs.environment || 'dev123' }}
       - name: Print event name
-        run: echo "event name is:" ${{ github.event_name }} 
+        run: echo "event name is:" ${{ github.event_name }}
+      - name: Run if
+        run: |
+          INPUT="${{ github.event.inputs.spec_suite }}"
+          if [ -n "$INPUT" ]; then
+            MY_VAR="--spec $INPUT"
+          echo %MY_VAR
+
